@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101010">
+<title>LAMPIONFINDS — znajdź swój styl</title>
+<style>
+:root{--bg:#0b0c0e;--panel:#141619;--panel2:#1b1e22;--line:#292d32;--text:#f4f4f2;--muted:#969ba3;--red:#e04444;--red2:#ff6262;--radius:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#292126 0%,#101113 38%,var(--bg) 75%);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(11,12,14,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav{max-width:1250px;margin:auto;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:950;letter-spacing:2.2px;font-size:21px;text-decoration:none;color:var(--text);white-space:nowrap}.brand span{color:var(--red)}
+.navright{display:flex;align-items:center;gap:10px}.admin-btn,.ghost-btn{border:1px solid var(--line);background:#17191c;color:var(--text);padding:10px 15px;border-radius:999px;font-size:13px;font-weight:700}.admin-btn:hover,.ghost-btn:hover{border-color:#777}
+main{max-width:1250px;margin:auto;padding:0 24px 70px}
+.hero{padding:70px 0 45px;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:#ff8a8a;text-transform:uppercase;letter-spacing:3px;font-size:10px;font-weight:800}.eyebrow:before,.eyebrow:after{content:"";width:24px;height:1px;background:#a93a3a}
+.hero h1{font-size:clamp(42px,8vw,82px);letter-spacing:-4px;line-height:.98;margin:19px 0 14px;font-weight:950}.hero h1 span{color:var(--red)}.hero p{color:var(--muted);font-size:15px;margin:0 auto;max-width:510px;line-height:1.7}
+.hero-line{height:1px;max-width:170px;margin:30px auto 0;background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:0 0 22px}
+.search-wrap{position:relative;flex:1 1 280px;max-width:440px}.search-wrap span{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#777}.search{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 15px 14px 43px;color:var(--text);outline:none}.search:focus,.field:focus,.select:focus{border-color:#a84a4a}
+.select{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:13px 14px;outline:none}
+.categories{display:flex;gap:8px;overflow-x:auto;padding:3px 0 18px;scrollbar-width:thin}.chip{border:1px solid var(--line);background:transparent;color:#aeb2b8;padding:9px 15px;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:700;transition:.2s}.chip.active,.chip:hover{background:var(--text);color:#111;border-color:var(--text)}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin:8px 0 17px}.section-head h2{font-size:18px;margin:0;letter-spacing:-.4px}.count{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+.product{background:linear-gradient(160deg,#191c20,#111315);border:1px solid #25292e;border-radius:17px;overflow:hidden;transition:transform .22s,border-color .22s;position:relative}.product:hover{transform:translateY(-4px);border-color:#555}
+.photo{aspect-ratio:4/5;background:#202328;position:relative;overflow:hidden;cursor:pointer}.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}.product:hover .photo img{transform:scale(1.045)}.no-photo{height:100%;display:grid;place-items:center;color:#6e747d;font-size:12px;letter-spacing:1px}
+.heart{position:absolute;right:11px;top:11px;width:35px;height:35px;border:1px solid #ffffff25;background:#101114bd;color:white;border-radius:50%;font-size:18px;display:grid;place-items:center;backdrop-filter:blur(8px)}.heart.active{color:#ff6868}
+.product-info{padding:14px}.category-label{font-size:9px;letter-spacing:1.8px;text-transform:uppercase;color:#f07878;font-weight:800}.product-name{font-size:14px;font-weight:800;margin:7px 0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.price{font-size:13px;color:#c5c8cd;margin-bottom:13px}.product-actions{display:flex;gap:7px}.visit{flex:1;text-align:center;text-decoration:none;background:var(--text);color:#111;border-radius:9px;padding:10px 8px;font-size:11px;font-weight:900;transition:.2s}.visit:hover{background:#ff7777}.small-action{border:1px solid var(--line);background:#202328;color:#ddd;border-radius:9px;padding:8px 10px;font-size:11px}
+.admin-tools{display:flex;gap:6px;margin-top:8px}.admin-tools button{flex:1}
+.empty{grid-column:1/-1;text-align:center;padding:65px 15px;border:1px dashed #34383e;border-radius:18px;color:var(--muted)}.empty strong{display:block;color:#eee;font-size:16px;margin-bottom:7px}
+footer{border-top:1px solid #24272b;text-align:center;padding:27px 15px;color:#737982;font-size:11px;letter-spacing:1px}footer b{color:#ddd}
+.modal-backdrop{position:fixed;inset:0;z-index:30;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(7px)}.modal-backdrop.show{display:flex}.modal{width:min(540px,100%);max-height:90vh;overflow:auto;background:#15181c;border:1px solid #333941;border-radius:20px;padding:24px;box-shadow:0 25px 90px #0009}.modal h3{margin:0 0 6px;font-size:21px}.modal-sub{color:var(--muted);font-size:12px;margin:0 0 20px;line-height:1.5}.field-label{display:block;color:#b9bec5;font-size:11px;font-weight:700;margin:13px 0 7px}.field{width:100%;padding:12px 13px;border-radius:10px;border:1px solid #343941;background:#0e1012;color:white;outline:none}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.modal-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:21px}.primary{border:0;border-radius:10px;padding:12px 17px;background:var(--red);color:white;font-weight:800}.primary:hover{background:var(--red2)}.cancel{border:1px solid var(--line);background:#202328;color:#ddd;border-radius:10px;padding:12px 17px;font-weight:700}.hint{font-size:10px;color:#818791;line-height:1.5;margin-top:7px}.admin-status{display:none;align-items:center;gap:7px;color:#9be2ac;font-size:11px;font-weight:700}.admin-status.show{display:flex}
+.lightbox{position:fixed;inset:0;background:#000e;z-index:50;display:none;align-items:center;justify-content:center;padding:25px}.lightbox.show{display:flex}.lightbox img{max-width:min(900px,90vw);max-height:85vh;object-fit:contain;border-radius:12px}.lightbox button{position:absolute;top:20px;right:22px;background:#222;color:white;border:1px solid #555;border-radius:50%;width:42px;height:42px;font-size:22px}
+@media(max-width:950px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.nav{padding:14px 16px}.brand{font-size:17px;letter-spacing:1.5px}.admin-btn{padding:9px 12px;font-size:11px}main{padding:0 15px 50px}.hero{padding:53px 0 34px}.hero h1{letter-spacing:-2.5px}.hero p{font-size:13px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-info{padding:11px}.product-name{font-size:12px}.price{font-size:12px}.visit{font-size:10px}.small-action{padding:8px}.toolbar{align-items:stretch}.search-wrap{max-width:none;flex-basis:100%}.select{flex:1}.section-head h2{font-size:16px}}
+@media(max-width:360px){.grid{grid-template-columns:1fr}.photo{aspect-ratio:1/1}}
+</style>
+</head>
+<body>
+<header class="topbar"><nav class="nav">
+<a class="brand" href="#">LAMPION<span>FINDS</span></a>
+<div class="navright"><div id="adminStatus" class="admin-status">● TRYB ADMINA</div><button class="admin-btn" id="adminButton">Panel administratora</button></div>
+</nav></header>
+<main>
+<section class="hero">
+<div class="eyebrow">CURATED STREETWEAR</div>
+<h1>FIND YOUR <span>STYLE.</span></h1>
+<p>Starannie wybrane rzeczy, inspiracje i streetwearowe perełki. Odkryj coś, co pasuje do Ciebie.</p>
+<div class="hero-line"></div>
+</section>
+<section>
+<div class="toolbar">
+<div class="search-wrap"><span>⌕</span><input id="search" class="search" placeholder="Szukaj produktów..." autocomplete="off"></div>
+<select id="sort" class="select" aria-label="Sortowanie"><option value="new">Najnowsze</option><option value="cheap">Cena: od najniższej</option><option value="expensive">Cena: od najwyższej</option><option value="az">Nazwa: A–Z</option></select>
+<select id="view" class="select" aria-label="Filtr ulubionych"><option value="all">Wszystkie produkty</option><option value="fav">Ulubione</option></select>
+</div>
+<div class="categories" id="categories"></div>
+<div class="section-head"><h2>Odkryj produkty</h2><span class="count" id="count"></span></div>
+<div class="grid" id="products"></div>
+</section>
+</main>
+<footer><b>LAMPIONFINDS</b> &nbsp;·&nbsp; FIND YOUR STYLE &nbsp;·&nbsp; © <span id="year"></span></footer>
+
+<div class="modal-backdrop" id="loginModal"><div class="modal">
+<h3>Panel administratora</h3><p class="modal-sub">Zaloguj się, aby zarządzać produktami w LAMPIONFINDS.</p>
+<label class="field-label" for="password">Hasło administratora</label><input class="field" id="password" type="password" placeholder="Wpisz hasło">
+<p class="hint">Hasło demonstracyjne: <b>linkhub123</b>. Zmień je w kodzie strony przed publikacją. To logowanie lokalne, nie jest zabezpieczeniem serwerowym.</p>
+<div class="modal-actions"><button class="cancel" data-close="loginModal">Anuluj</button><button class="primary" id="login">Zaloguj się</button></div>
+</div></div>
+
+<div class="modal-backdrop" id="productModal"><div class="modal">
+<h3 id="productModalTitle">Dodaj produkt</h3><p class="modal-sub">Uzupełnij informacje. Możesz dodać maksymalnie 5 zdjęć.</p>
+<input type="hidden" id="editId">
+<label class="field-label" for="pName">Nazwa produktu</label><input class="field" id="pName" placeholder="Np. Oversize hoodie">
+<div class="form-grid">
+<div><label class="field-label" for="pCategory">Kategoria</label><select class="field" id="pCategory"><option>Bluzy</option><option>Koszulki</option><option>Spodnie</option><option>Buty</option><option>Kurtki</option><option>Akcesoria</option><option>Inne</option></select></div>
+<div><label class="field-label" for="pPrice">Cena</label><input class="field" id="pPrice" placeholder="Np. 129 zł"></div>
+</div>
+<label class="field-label" for="pLink">Link do produktu</label><input class="field" id="pLink" type="url" placeholder="https://...">
+<label class="field-label" for="pImages">Zdjęcia produktu</label><input class="field" id="pImages" type="file" accept="image/*" multiple>
+<p class="hint">Wybierz maksymalnie 5 zdjęć. Dla płynnego działania zalecane są małe pliki (do ok. 700 KB każdy). Jeśli edytujesz produkt i nie wybierzesz nowych zdjęć, obecne zostaną zachowane.</p>
+<div class="modal-actions"><button class="cancel" data-close="productModal">Anuluj</button><button class="primary" id="saveProduct">Zapisz produkt</button></div>
+</div></div>
+<div class="lightbox" id="lightbox"><button id="closeLightbox" aria-label="Zamknij">×</button><img id="lightboxImage" alt="Zdjęcie produktu"></div>
+
+<script>
+const STORAGE_KEY='lampionfinds-items-v1';
+const FAV_KEY='lampionfinds-favorites-v1';
+const CATS=['Wszystko','Bluzy','Koszulki','Spodnie','Buty','Kurtki','Akcesoria','Inne'];
+const $=id=>document.getElementById(id);
+let items=loadItems(),favorites=loadFavorites(),isAdmin=false,activeCategory='Wszystko';
+function loadItems(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch{return []}}
+function loadFavorites(){try{return JSON.parse(localStorage.getItem(FAV_KEY)||'[]')}catch{return []}}
+function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(items))}catch{alert('Brak miejsca na zapis zdjęć. Spróbuj dodać mniejsze pliki.')}} 
+function safeUrl(url){try{const u=new URL(url);return ['http:','https:'].includes(u.protocol)?u.href:'#'}catch{return '#'}}
+function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function renderCategories(){$('categories').innerHTML=CATS.map(c=>`<button class="chip ${activeCategory===c?'active':''}" data-cat="${c}">${c}</button>`).join('');document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{activeCategory=b.dataset.cat;renderCategories();render()})}
+function render(){
+ const q=$('search').value.trim().toLowerCase(),sort=$('sort').value,view=$('view').value;
+ let list=items.filter(p=>(activeCategory==='Wszystko'||p.category===activeCategory)&&(!q||(p.name+' '+p.category).toLowerCase().includes(q))&&(view!=='fav'||favorites.includes(p.id)));
+ if(sort==='cheap')list.sort((a,b)=>priceNum(a.price)-priceNum(b.price));else if(sort==='expensive')list.sort((a,b)=>priceNum(b.price)-priceNum(a.price));else if(sort==='az')list.sort((a,b)=>a.name.localeCompare(b.name,'pl'));else list.sort((a,b)=>(b.created||0)-(a.created||0));
+ $('count').textContent=`${list.length} ${list.length===1?'produkt':list.length>1&&list.length<5?'produkty':'produktów'}`;
+ if(!list.length){$('products').innerHTML=`<div class="empty"><strong>Na razie tu pusto</strong>${items.length?'Nie znaleziono produktów dla wybranych filtrów.':'Produkty pojawią się tutaj, gdy dodasz je w panelu administratora.'}</div>`;return}
+ $('products').innerHTML=list.map(p=>`<article class="product">
+ <div class="photo" data-photo="${p.id}">${p.images&&p.images[0]?`<img src="${p.images[0]}" alt="${escapeHtml(p.name)}">`:`<div class="no-photo">LAMPIONFINDS</div>`}
+ <button class="heart ${favorites.includes(p.id)?'active':''}" data-fav="${p.id}" aria-label="Dodaj do ulubionych">${favorites.includes(p.id)?'♥':'♡'}</button></div>
+ <div class="product-info"><div class="category-label">${escapeHtml(p.category||'Inne')}</div><div class="product-name" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</div><div class="price">${escapeHtml(p.price||'Cena niepodana')}</div>
+ <div class="product-actions"><a class="visit" href="${safeUrl(p.link||'')}" target="_blank" rel="noopener noreferrer">ZOBACZ PRODUKT ↗</a></div>
+ ${isAdmin?`<div class="admin-tools"><button class="small-action" data-edit="${p.id}">Edytuj</button><button class="small-action" data-delete="${p.id}">Usuń</button></div>`:''}
+ </div></article>`).join('');
+ document.querySelectorAll('[data-fav]').forEach(b=>b.onclick=e=>{e.stopPropagation();const id=b.dataset.fav;favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];localStorage.setItem(FAV_KEY,JSON.stringify(favorites));render()});
+ document.querySelectorAll('[data-photo]').forEach(el=>el.onclick=()=>{const p=items.find(x=>x.id===el.dataset.photo);if(p?.images?.length){$('lightboxImage').src=p.images[0];$('lightbox').classList.add('show')}});
+ document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>{if(confirm('Usunąć ten produkt?')){items=items.filter(p=>p.id!==b.dataset.delete);favorites=favorites.filter(x=>x!==b.dataset.delete);persist();localStorage.setItem(FAV_KEY,JSON.stringify(favorites));render()}});
+ document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openProduct(b.dataset.edit));
+}
+function priceNum(v){const n=parseFloat(String(v||'').replace(',','.').replace(/[^0-9.]/g,''));return Number.isFinite(n)?n:0}
+function openModal(id){$(id).classList.add('show')}function closeModal(id){$(id).classList.remove('show')}
+function openProduct(id=''){const p=items.find(x=>x.id===id);$('editId').value=p?.id||'';$('productModalTitle').textContent=p?'Edytuj produkt':'Dodaj produkt';$('pName').value=p?.name||'';$('pCategory').value=p?.category||'Bluzy';$('pPrice').value=p?.price||'';$('pLink').value=p?.link||'';$('pImages').value='';openModal('productModal')}
+$('adminButton').onclick=()=>{if(isAdmin){openProduct();return}openModal('loginModal');$('password').focus()};
+$('login').onclick=()=>{if($('password').value==='linkhub123'){isAdmin=true;closeModal('loginModal');$('password').value='';$('adminButton').textContent='＋ Dodaj produkt';$('adminStatus').classList.add('show');render()}else alert('Nieprawidłowe hasło.')};
+$('password').addEventListener('keydown',e=>{if(e.key==='Enter')$('login').click()});
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
+['loginModal','productModal'].forEach(id=>$(id).addEventListener('click',e=>{if(e.target===$(id))closeModal(id)}));
+$('saveProduct').onclick=async()=>{
+ const name=$('pName').value.trim(),link=$('pLink').value.trim(),files=[...$('pImages').files].slice(0,5),editId=$('editId').value;
+ if(!name){alert('Wpisz nazwę produktu.');return}
+ if(link&&!/^https?:\/\//i.test(link)){alert('Link powinien zaczynać się od https:// lub http://');return}
+ const old=items.find(p=>p.id===editId);let images=old?.images||[];
+ if(files.length){try{images=await Promise.all(files.map(file=>new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})))}catch{alert('Nie udało się odczytać zdjęć.');return}}
+ const product={id:old?.id||crypto.randomUUID(),name,category:$('pCategory').value,price:$('pPrice').value.trim(),link,images,created:old?.created||Date.now()};
+ if(old)items=items.map(p=>p.id===editId?product:p);else items.push(product);
+ persist();closeModal('productModal');render();
+};
+$('search').addEventListener('input',render);$('sort').addEventListener('change',render);$('view').addEventListener('change',render);
+$('closeLightbox').onclick=()=>$('lightbox').classList.remove('show');$('lightbox').onclick=e=>{if(e.target===$('lightbox'))$('lightbox').classList.remove('show')};
+$('year').textContent=new Date().getFullYear();renderCategories();render();
+</script>
+</body>
+</html>
