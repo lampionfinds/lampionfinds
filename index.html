@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -5,15 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#101010">
 <title>LAMPIONFINDS — znajdź swój styl</title>
-
 <style>
-:root{--bg:#0b0c0e;--panel:#141619;--panel2:#1b1e22;--line:#292d32;--text:#f4f4f2;--muted:#969ba3;--red:#e04444;--red2:#ff6262}
+:root{--bg:#0b0c0e;--panel:#141619;--panel2:#1b1e22;--line:#292d32;--text:#f4f4f2;--muted:#969ba3;--red:#e04444;--red2:#ff6262;--radius:18px}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:radial-gradient(ellipse at 50% -20%,#292126 0%,#101113 38%,var(--bg) 75%);color:var(--text);font-family:Inter,Arial,sans-serif;min-height:100vh}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-.topbar{position:sticky;top:0;z-index:10;background:rgba(11,12,14,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(11,12,14,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
 .nav{max-width:1250px;margin:auto;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
 .brand{font-weight:950;letter-spacing:2.2px;font-size:21px;text-decoration:none;color:var(--text);white-space:nowrap}
 .brand span{color:var(--red)}
@@ -35,7 +35,7 @@ main{max-width:1250px;margin:auto;padding:0 24px 70px}
 .search:focus,.field:focus,.select:focus{border-color:#a84a4a}
 .select{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:13px 14px;outline:none}
 .categories{display:flex;gap:8px;overflow-x:auto;padding:3px 0 18px;scrollbar-width:thin}
-.chip{border:1px solid var(--line);background:transparent;color:#aeb2b8;padding:9px 15px;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:700}
+.chip{border:1px solid var(--line);background:transparent;color:#aeb2b8;padding:9px 15px;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:700;transition:.2s}
 .chip.active,.chip:hover{background:var(--text);color:#111;border-color:var(--text)}
 .section-head{display:flex;justify-content:space-between;align-items:end;margin:8px 0 17px}
 .section-head h2{font-size:18px;margin:0;letter-spacing:-.4px}
@@ -47,14 +47,14 @@ main{max-width:1250px;margin:auto;padding:0 24px 70px}
 .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .product:hover .photo img{transform:scale(1.045)}
 .no-photo{height:100%;display:grid;place-items:center;color:#6e747d;font-size:12px;letter-spacing:1px}
-.heart{position:absolute;right:11px;top:11px;width:35px;height:35px;border:1px solid #ffffff25;background:#101114bd;color:white;border-radius:50%;font-size:18px;display:grid;place-items:center}
+.heart{position:absolute;right:11px;top:11px;width:35px;height:35px;border:1px solid #ffffff25;background:#101114bd;color:white;border-radius:50%;font-size:18px;display:grid;place-items:center;backdrop-filter:blur(8px)}
 .heart.active{color:#ff6868}
 .product-info{padding:14px}
 .category-label{font-size:9px;letter-spacing:1.8px;text-transform:uppercase;color:#f07878;font-weight:800}
 .product-name{font-size:14px;font-weight:800;margin:7px 0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .price{font-size:13px;color:#c5c8cd;margin-bottom:13px}
 .product-actions{display:flex;gap:7px}
-.visit{flex:1;text-align:center;text-decoration:none;background:var(--text);color:#111;border-radius:9px;padding:10px 8px;font-size:11px;font-weight:900}
+.visit{flex:1;text-align:center;text-decoration:none;background:var(--text);color:#111;border-radius:9px;padding:10px 8px;font-size:11px;font-weight:900;transition:.2s}
 .visit:hover{background:#ff7777}
 .small-action{border:1px solid var(--line);background:#202328;color:#ddd;border-radius:9px;padding:8px 10px;font-size:11px}
 .admin-tools{display:flex;gap:6px;margin-top:8px}
@@ -71,48 +71,61 @@ footer b{color:#ddd}
 .field-label{display:block;color:#b9bec5;font-size:11px;font-weight:700;margin:13px 0 7px}
 .field{width:100%;padding:12px 13px;border-radius:10px;border:1px solid #343941;background:#0e1012;color:white;outline:none}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
-.modal-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:21px;flex-wrap:wrap}
+.modal-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:21px}
 .primary{border:0;border-radius:10px;padding:12px 17px;background:var(--red);color:white;font-weight:800}
 .primary:hover{background:var(--red2)}
 .cancel{border:1px solid var(--line);background:#202328;color:#ddd;border-radius:10px;padding:12px 17px;font-weight:700}
-.secondary{border:1px solid var(--line);background:transparent;color:#ddd;border-radius:10px;padding:12px 14px;font-weight:700}
-.secondary:hover{border-color:#777}
 .hint{font-size:10px;color:#818791;line-height:1.5;margin-top:7px}
 .admin-status{display:none;align-items:center;gap:7px;color:#9be2ac;font-size:11px;font-weight:700}
 .admin-status.show{display:flex}
-.lightbox{position:fixed;inset:0;background:#000e;z-index:50;display:none;align-items:center;justify-content:center;padding:25px}
+
+/* PODGLĄD ZDJĘĆ */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:50;display:none;align-items:center;justify-content:center;padding:65px 75px}
 .lightbox.show{display:flex}
-.lightbox img{max-width:min(900px,90vw);max-height:85vh;object-fit:contain;border-radius:12px}
-.lightbox button{position:absolute;top:20px;right:22px;background:#222;color:white;border:1px solid #555;border-radius:50%;width:42px;height:42px;font-size:22px}
-.notice{margin:12px 0;padding:12px;border:1px solid #454545;border-radius:10px;color:#ddd;font-size:12px;line-height:1.5;display:none}
-.notice.show{display:block}
+.lightbox img{max-width:min(1000px,85vw);max-height:82vh;width:auto;height:auto;object-fit:contain;border-radius:12px}
+.lightbox-close{position:absolute;top:18px;right:22px;background:#222;color:white;border:1px solid #555;border-radius:50%;width:44px;height:44px;font-size:25px;display:grid;place-items:center;z-index:3}
+.lightbox-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:1px solid #ffffff45;border-radius:50%;background:#222d;color:white;font-size:32px;display:grid;place-items:center;z-index:3;transition:.2s}
+.lightbox-arrow:hover,.lightbox-close:hover{background:#e04444;border-color:#e04444}
+.lightbox-prev{left:22px}
+.lightbox-next{right:22px}
+.lightbox-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:#222d;border:1px solid #ffffff30;color:white;padding:8px 15px;border-radius:30px;font-size:12px;letter-spacing:1px}
+@media(max-width:650px){
+.lightbox{padding:60px 48px}
+.lightbox img{max-width:100%;max-height:75vh}
+.lightbox-arrow{width:38px;height:38px;font-size:26px}
+.lightbox-prev{left:7px}
+.lightbox-next{right:7px}
+.lightbox-close{top:12px;right:12px;width:38px;height:38px}
+.lightbox-counter{bottom:12px}
+}
 @media(max-width:950px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:650px){
-.nav{padding:14px 16px}.brand{font-size:17px;letter-spacing:1.5px}
+.nav{padding:14px 16px}
+.brand{font-size:17px;letter-spacing:1.5px}
 .admin-btn{padding:9px 12px;font-size:11px}
-main{padding:0 15px 50px}.hero{padding:53px 0 34px}
-.hero h1{letter-spacing:-2.5px}.hero p{font-size:13px}
+main{padding:0 15px 50px}
+.hero{padding:53px 0 34px}
+.hero h1{letter-spacing:-2.5px}
+.hero p{font-size:13px}
 .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.product-info{padding:11px}.product-name{font-size:12px}
-.price{font-size:12px}.visit{font-size:10px}.small-action{padding:8px}
-.toolbar{align-items:stretch}.search-wrap{max-width:none;flex-basis:100%}
-.select{flex:1}.section-head h2{font-size:16px}
+.product-info{padding:11px}
+.product-name{font-size:12px}
+.price{font-size:12px}
+.visit{font-size:10px}
+.small-action{padding:8px}
+.toolbar{align-items:stretch}
+.search-wrap{max-width:none;flex-basis:100%}
+.select{flex:1}
+.section-head h2{font-size:16px}
 }
 @media(max-width:360px){.grid{grid-template-columns:1fr}.photo{aspect-ratio:1/1}}
 </style>
 </head>
-
 <body>
-
-<header class="topbar">
-<nav class="nav">
+<header class="topbar"><nav class="nav">
 <a class="brand" href="#">LAMPION<span>FINDS</span></a>
-<div class="navright">
-<div id="adminStatus" class="admin-status">● TRYB ADMINA</div>
-<button class="admin-btn" id="adminButton">Panel administratora</button>
-</div>
-</nav>
-</header>
+<div class="navright"><div id="adminStatus" class="admin-status">● TRYB ADMINA</div><button class="admin-btn" id="adminButton">Panel administratora</button></div>
+</nav></header>
 
 <main>
 <section class="hero">
@@ -121,1078 +134,322 @@ main{padding:0 15px 50px}.hero{padding:53px 0 34px}
 <p>Starannie wybrane rzeczy, inspiracje i streetwearowe perełki. Odkryj coś, co pasuje do Ciebie.</p>
 <div class="hero-line"></div>
 </section>
-
 <section>
 <div class="toolbar">
-<div class="search-wrap">
-<span>⌕</span>
-<input id="search" class="search" placeholder="Szukaj produktów..." autocomplete="off">
+<div class="search-wrap"><span>⌕</span><input id="search" class="search" placeholder="Szukaj produktów..." autocomplete="off"></div>
+<select id="sort" class="select" aria-label="Sortowanie"><option value="new">Najnowsze</option><option value="cheap">Cena: od najniższej</option><option value="expensive">Cena: od najwyższej</option><option value="az">Nazwa: A–Z</option></select>
+<select id="view" class="select" aria-label="Filtr ulubionych"><option value="all">Wszystkie produkty</option><option value="fav">Ulubione</option></select>
 </div>
-
-<select id="sort" class="select" aria-label="Sortowanie">
-<option value="new">Najnowsze</option>
-<option value="cheap">Cena: od najniższej</option>
-<option value="expensive">Cena: od najwyższej</option>
-<option value="az">Nazwa: A–Z</option>
-</select>
-
-<select id="view" class="select" aria-label="Filtr ulubionych">
-<option value="all">Wszystkie produkty</option>
-<option value="fav">Ulubione</option>
-</select>
-</div>
-
 <div class="categories" id="categories"></div>
-<div class="section-head">
-<h2>Odkryj produkty</h2>
-<span class="count" id="count"></span>
-</div>
-<div class="grid" id="products">
-<div class="empty">Ładowanie produktów…</div>
-</div>
+<div class="section-head"><h2>Odkryj produkty</h2><span class="count" id="count"></span></div>
+<div class="grid" id="products"></div>
 </section>
 </main>
 
-<footer>
-<b>LAMPIONFINDS</b> &nbsp;·&nbsp; FIND YOUR STYLE &nbsp;·&nbsp; © <span id="year"></span>
-</footer>
+<footer><b>LAMPIONFINDS</b> &nbsp;·&nbsp; FIND YOUR STYLE &nbsp;·&nbsp; © <span id="year"></span></footer>
 
-<!-- LOGOWANIE -->
-<div class="modal-backdrop" id="loginModal">
-<div class="modal">
-<h3>Panel administratora</h3>
-<p class="modal-sub">Zaloguj się na konto administratora.</p>
+<div class="modal-backdrop" id="loginModal"><div class="modal">
+<h3>Panel administratora</h3><p class="modal-sub">Zaloguj się, aby zarządzać produktami w LAMPIONFINDS.</p>
+<label class="field-label" for="password">Hasło administratora</label><input class="field" id="password" type="password" placeholder="Wpisz hasło">
+<p class="hint">Hasło demonstracyjne: <b>linkhub123</b>. Zmień je w kodzie strony przed publikacją. To logowanie lokalne, nie jest zabezpieczeniem serwerowym.</p>
+<div class="modal-actions"><button class="cancel" data-close="loginModal">Anuluj</button><button class="primary" id="login">Zaloguj się</button></div>
+</div></div>
 
-<label class="field-label" for="email">Adres e-mail</label>
-<input class="field" id="email" type="email" placeholder="Twój e-mail" autocomplete="username">
-
-<label class="field-label" for="password">Hasło</label>
-<input class="field" id="password" type="password" placeholder="Hasło do Supabase" autocomplete="current-password">
-
-<div class="notice" id="loginNotice"></div>
-
-<div class="modal-actions">
-<button class="cancel" data-close="loginModal">Anuluj</button>
-<button class="secondary" id="resetPasswordButton" type="button">Nie pamiętasz hasła?</button>
-<button class="primary" id="login">Zaloguj się</button>
-</div>
-</div>
-</div>
-
-<!-- FORMULARZ PRODUKTU -->
-<div class="modal-backdrop" id="productModal">
-<div class="modal">
-<h3 id="productModalTitle">Dodaj produkt</h3>
-<p class="modal-sub">Uzupełnij informacje. Możesz dodać maksymalnie 5 zdjęć.</p>
-
+<div class="modal-backdrop" id="productModal"><div class="modal">
+<h3 id="productModalTitle">Dodaj produkt</h3><p class="modal-sub">Uzupełnij informacje. Możesz dodać maksymalnie 5 zdjęć.</p>
 <input type="hidden" id="editId">
-
-<label class="field-label" for="pName">Nazwa produktu</label>
-<input class="field" id="pName" placeholder="Np. Oversize hoodie">
-
+<label class="field-label" for="pName">Nazwa produktu</label><input class="field" id="pName" placeholder="Np. Oversize hoodie">
 <div class="form-grid">
-<div>
-<label class="field-label" for="pCategory">Kategoria</label>
-<select class="field" id="pCategory">
-<option>Bluzy</option>
-<option>Koszulki</option>
-<option>Spodnie</option>
-<option>Buty</option>
-<option>Kurtki</option>
-<option>Akcesoria</option>
-<option>Inne</option>
-</select>
+<div><label class="field-label" for="pCategory">Kategoria</label><select class="field" id="pCategory"><option>Bluzy</option><option>Koszulki</option><option>Spodnie</option><option>Buty</option><option>Kurtki</option><option>Akcesoria</option><option>Inne</option></select></div>
+<div><label class="field-label" for="pPrice">Cena</label><input class="field" id="pPrice" placeholder="Np. 129 zł"></div>
 </div>
+<label class="field-label" for="pLink">Link do produktu</label><input class="field" id="pLink" type="url" placeholder="https://...">
+<label class="field-label" for="pImages">Zdjęcia produktu</label><input class="field" id="pImages" type="file" accept="image/*" multiple>
+<p class="hint">Wybierz maksymalnie 5 zdjęć. Dla płynnego działania zalecane są małe pliki (do ok. 700 KB każdy). Jeśli edytujesz produkt i nie wybierzesz nowych zdjęć, obecne zostaną zachowane.</p>
+<div class="modal-actions"><button class="cancel" data-close="productModal">Anuluj</button><button class="primary" id="saveProduct">Zapisz produkt</button></div>
+</div></div>
 
-<div>
-<label class="field-label" for="pPrice">Cena</label>
-<input class="field" id="pPrice" placeholder="Np. 129 zł">
-</div>
-</div>
-
-<label class="field-label" for="pDescription">Opis produktu</label>
-<textarea class="field" id="pDescription" rows="3" placeholder="Krótki opis (opcjonalnie)"></textarea>
-
-<label class="field-label" for="pLink">Link do produktu</label>
-<input class="field" id="pLink" type="url" placeholder="https://...">
-
-<label class="field-label" for="pImages">Zdjęcia produktu</label>
-<input class="field" id="pImages" type="file" accept="image/*" multiple>
-
-<p class="hint">Możesz dodać maksymalnie 5 zdjęć łącznie. Przy edycji nowe zdjęcia zostaną dodane do obecnych, jeśli będzie miejsce.</p>
-
-<div class="notice" id="productNotice"></div>
-
-<div class="modal-actions">
-<button class="cancel" data-close="productModal">Anuluj</button>
-<button class="primary" id="saveProduct">Zapisz produkt</button>
-</div>
-</div>
-</div>
-
-<!-- POWIĘKSZENIE ZDJĘCIA -->
+<!-- GALERIA ZDJĘĆ -->
 <div class="lightbox" id="lightbox">
-<button id="closeLightbox" aria-label="Zamknij">×</button>
+<button class="lightbox-close" id="closeLightbox" aria-label="Zamknij">×</button>
+<button class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Poprzednie zdjęcie">‹</button>
 <img id="lightboxImage" alt="Zdjęcie produktu">
+<button class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Następne zdjęcie">›</button>
+<div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
 </div>
-
-<!-- ZMIANA HASŁA -->
-<div id="newPasswordModal" style="display:none;position:fixed;inset:0;background:#000c;z-index:99999;align-items:center;justify-content:center;">
-<div style="background:#222;padding:25px;border-radius:12px;width:90%;max-width:380px;color:white;">
-<h2>Ustaw nowe hasło</h2>
-<input id="newPassword" type="password" placeholder="Nowe hasło" style="display:block;width:100%;padding:12px;margin:12px 0;box-sizing:border-box;">
-<input id="confirmPassword" type="password" placeholder="Powtórz nowe hasło" style="display:block;width:100%;padding:12px;margin:12px 0;box-sizing:border-box;">
-<button id="saveNewPasswordButton" style="padding:12px;width:100%;cursor:pointer;">Zapisz nowe hasło</button>
-</div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-/* =========================================================
-   USTAWIENIA SUPABASE
-========================================================= */
+const STORAGE_KEY='lampionfinds-items-v1';
+const FAV_KEY='lampionfinds-favorites-v1';
+const CATS=['Wszystko','Bluzy','Koszulki','Spodnie','Buty','Kurtki','Akcesoria','Inne'];
+const $=id=>document.getElementById(id);
 
-const SUPABASE_URL = 'https://zsfcguvddlpgmsmfzkkd.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_unj9ZWn7w1Tb78Xi51ZXJA_6IrF8dhc';
+let items=loadItems(),favorites=loadFavorites(),isAdmin=false,activeCategory='Wszystko';
+let lightboxImages=[];
+let lightboxIndex=0;
 
-const ADMIN_UID = 'c2d319fe-b5cb-4625-92b4-45e9dc1ab45a';
-const TABLE = 'products';
-const BUCKET = 'product-images';
-
-const { createClient } = supabase;
-const db = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-
-const $ = id => document.getElementById(id);
-
-const CATS = [
-  'Wszystko',
-  'Bluzy',
-  'Koszulki',
-  'Spodnie',
-  'Buty',
-  'Kurtki',
-  'Akcesoria',
-  'Inne'
-];
-
-let items = [];
-let favorites = loadFavorites();
-let isAdmin = false;
-let activeCategory = 'Wszystko';
-let currentUser = null;
-
-/* =========================================================
-   ULUBIONE
-========================================================= */
-
-function loadFavorites() {
-  try {
-    return JSON.parse(
-      localStorage.getItem('lampionfinds-favorites-v1') || '[]'
-    ).map(String);
-  } catch {
-    return [];
-  }
+function loadItems(){
+ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}
+ catch{return []}
+}
+function loadFavorites(){
+ try{return JSON.parse(localStorage.getItem(FAV_KEY)||'[]')}
+ catch{return []}
+}
+function persist(){
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(items))}
+ catch{alert('Brak miejsca na zapis zdjęć. Spróbuj dodać mniejsze pliki.')}
+}
+function safeUrl(url){
+ try{const u=new URL(url);return ['http:','https:'].includes(u.protocol)?u.href:'#'}
+ catch{return '#'}
+}
+function escapeHtml(s=''){
+ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
 }
 
-function saveFavorites() {
-  localStorage.setItem(
-    'lampionfinds-favorites-v1',
-    JSON.stringify(favorites)
-  );
-}
-
-/* =========================================================
-   KOMUNIKATY I POMOCNICZE
-========================================================= */
-
-function showNotice(id, message) {
-  const el = $(id);
-  el.textContent = message;
-  el.classList.add('show');
-}
-
-function hideNotice(id) {
-  const el = $(id);
-  el.textContent = '';
-  el.classList.remove('show');
-}
-
-function safeUrl(url) {
-  try {
-    const u = new URL(url);
-
-    if (['http:', 'https:'].includes(u.protocol)) {
-      return u.href;
-    }
-
-    return '#';
-  } catch {
-    return '#';
-  }
-}
-
-function escapeHtml(value = '') {
-  return String(value).replace(/[&<>"']/g, char => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;'
-  }[char]));
-}
-
-function imageUrl(image) {
-  if (typeof image === 'string') return image;
-
-  return image && typeof image.url === 'string'
-    ? image.url
-    : '';
-}
-
-function normalizeImages(value) {
-  if (!Array.isArray(value)) return [];
-
-  return value.map(image => {
-    if (typeof image === 'string') {
-      return { url: image, path: null };
-    }
-
-    if (image && typeof image.url === 'string') {
-      return {
-        url: image.url,
-        path: image.path || null
-      };
-    }
-
-    return null;
-  }).filter(Boolean).slice(0, 5);
-}
-
-function mapRow(row) {
-  return {
-    id: String(row.id),
-    name: row.name || '',
-    description: row.description || '',
-    price: row.price || '',
-    category: row.category || 'Inne',
-    link: row.product_url || '',
-    images: normalizeImages(row.images),
-    created: row.created_at
-      ? new Date(row.created_at).getTime()
-      : 0
-  };
-}
-
-function priceNum(value) {
-  const number = parseFloat(
-    String(value || '')
-      .replace(',', '.')
-      .replace(/[^0-9.]/g, '')
-  );
-
-  return Number.isFinite(number) ? number : 0;
-}
-
-/* =========================================================
-   TRYB ADMINISTRATORA
-========================================================= */
-
-function setAdminMode(enabled) {
-  isAdmin = enabled;
-
-  $('adminStatus').classList.toggle('show', enabled);
-
-  $('adminButton').textContent = enabled
-    ? '＋ Dodaj produkt'
-    : 'Panel administratora';
-
-  render();
-}
-
-function openModal(id) {
-  $(id).classList.add('show');
-}
-
-function closeModal(id) {
-  $(id).classList.remove('show');
-}
-
-/* =========================================================
-   KATEGORIE
-========================================================= */
-
-function renderCategories() {
-  $('categories').innerHTML = CATS.map(category => `
-    <button
-      class="chip ${activeCategory === category ? 'active' : ''}"
-      data-cat="${escapeHtml(category)}">
-      ${escapeHtml(category)}
-    </button>
-  `).join('');
-
-  document.querySelectorAll('[data-cat]').forEach(button => {
-    button.onclick = () => {
-      activeCategory = button.dataset.cat;
-      renderCategories();
-      render();
-    };
-  });
-}
-
-/* =========================================================
-   WYŚWIETLANIE PRODUKTÓW
-========================================================= */
-
-function render() {
-  const q = $('search').value.trim().toLowerCase();
-  const sort = $('sort').value;
-  const view = $('view').value;
-
-  let list = items.filter(product =>
-    (activeCategory === 'Wszystko' ||
-      product.category === activeCategory) &&
-    (!q ||
-      (
-        product.name + ' ' +
-        product.category + ' ' +
-        product.description
-      ).toLowerCase().includes(q)) &&
-    (view !== 'fav' ||
-      favorites.includes(String(product.id)))
-  );
-
-  if (sort === 'cheap') {
-    list.sort((a, b) => priceNum(a.price) - priceNum(b.price));
-  } else if (sort === 'expensive') {
-    list.sort((a, b) => priceNum(b.price) - priceNum(a.price));
-  } else if (sort === 'az') {
-    list.sort((a, b) => a.name.localeCompare(b.name, 'pl'));
-  } else {
-    list.sort((a, b) => b.created - a.created);
-  }
-
-  $('count').textContent =
-    `${list.length} ${
-      list.length === 1
-        ? 'produkt'
-        : list.length > 1 && list.length < 5
-          ? 'produkty'
-          : 'produktów'
-    }`;
-
-  if (!list.length) {
-    $('products').innerHTML = `
-      <div class="empty">
-        <strong>Na razie tu pusto</strong>
-        ${
-          items.length
-            ? 'Nie znaleziono produktów dla wybranych filtrów.'
-            : 'Produkty pojawią się tutaj, gdy dodasz je w panelu administratora.'
-        }
-      </div>
-    `;
-    return;
-  }
-
-  $('products').innerHTML = list.map(product => {
-    const firstImage = product.images.length
-      ? imageUrl(product.images[0])
-      : '';
-
-    const id = escapeHtml(product.id);
-    const isFavorite = favorites.includes(String(product.id));
-
-    return `
-      <article class="product">
-        <div class="photo" data-photo="${id}">
-          ${
-            firstImage
-              ? `<img src="${escapeHtml(firstImage)}" alt="${escapeHtml(product.name)}">`
-              : '<div class="no-photo">LAMPIONFINDS</div>'
-          }
-
-          <button
-            class="heart ${isFavorite ? 'active' : ''}"
-            data-fav="${id}"
-            aria-label="Dodaj do ulubionych">
-            ${isFavorite ? '♥' : '♡'}
-          </button>
-        </div>
-
-        <div class="product-info">
-          <div class="category-label">${escapeHtml(product.category)}</div>
-          <div class="product-name" title="${escapeHtml(product.name)}">
-            ${escapeHtml(product.name)}
-          </div>
-          <div class="price">
-            ${escapeHtml(product.price || 'Cena niepodana')}
-          </div>
-
-          <div class="product-actions">
-            <a
-              class="visit"
-              href="${escapeHtml(safeUrl(product.link))}"
-              target="_blank"
-              rel="noopener noreferrer">
-              ZOBACZ PRODUKT ↗
-            </a>
-          </div>
-
-          ${
-            isAdmin
-              ? `
-                <div class="admin-tools">
-                  <button class="small-action" data-edit="${id}">Edytuj</button>
-                  <button class="small-action" data-delete="${id}">Usuń</button>
-                </div>
-              `
-              : ''
-          }
-        </div>
-      </article>
-    `;
-  }).join('');
-
-  document.querySelectorAll('[data-fav]').forEach(button => {
-    button.onclick = event => {
-      event.stopPropagation();
-
-      const id = String(button.dataset.fav);
-
-      favorites = favorites.includes(id)
-        ? favorites.filter(item => item !== id)
-        : [...favorites, id];
-
-      saveFavorites();
-      render();
-    };
-  });
-
-  document.querySelectorAll('[data-photo]').forEach(element => {
-    element.onclick = event => {
-      if (event.target.closest('[data-fav]')) return;
-
-      const product = items.find(
-        item => String(item.id) === String(element.dataset.photo)
-      );
-
-      if (product && product.images.length) {
-        $('lightboxImage').src = imageUrl(product.images[0]);
-        $('lightbox').classList.add('show');
-      }
-    };
-  });
-
-  document.querySelectorAll('[data-edit]').forEach(button => {
-    button.onclick = () => openProduct(button.dataset.edit);
-  });
-
-  document.querySelectorAll('[data-delete]').forEach(button => {
-    button.onclick = () => deleteProduct(button.dataset.delete);
-  });
-}
-
-/* =========================================================
-   POBIERANIE PRODUKTÓW
-========================================================= */
-
-async function loadProducts() {
-  $('products').innerHTML =
-    '<div class="empty">Ładowanie produktów…</div>';
-
-  const { data, error } = await db
-    .from(TABLE)
-    .select('*')
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    console.error('Błąd pobierania produktów:', error);
-
-    $('products').innerHTML = `
-      <div class="empty">
-        <strong>Nie udało się pobrać produktów</strong>
-        ${escapeHtml(error.message)}
-      </div>
-    `;
-
-    return;
-  }
-
-  items = (data || []).map(mapRow);
-  render();
-}
-
-/* =========================================================
-   SPRAWDZANIE SESJI ADMINISTRATORA
-========================================================= */
-
-async function checkAdminSession() {
-  const { data, error } = await db.auth.getSession();
-
-  if (error) {
-    console.error('Błąd sprawdzania sesji:', error);
-    currentUser = null;
-    setAdminMode(false);
-    return;
-  }
-
-  const session = data.session;
-
-  if (!session) {
-    currentUser = null;
-    setAdminMode(false);
-    return;
-  }
-
-  if (session.user.id !== ADMIN_UID) {
-    await db.auth.signOut();
-
-    currentUser = null;
-    setAdminMode(false);
-
-    alert('To konto nie ma uprawnień administratora.');
-    return;
-  }
-
-  currentUser = session.user;
-  setAdminMode(true);
-}
-
-/* =========================================================
-   LOGOWANIE
-========================================================= */
-
-async function login() {
-  hideNotice('loginNotice');
-
-  const email = $('email').value.trim();
-  const password = $('password').value;
-
-  if (!email || !password) {
-    showNotice('loginNotice', 'Wpisz adres e-mail i hasło.');
-    return;
-  }
-
-  const button = $('login');
-  button.disabled = true;
-  button.textContent = 'Logowanie…';
-
-  try {
-    const { data, error } = await db.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if (error) {
-      showNotice('loginNotice', 'Błąd logowania: ' + error.message);
-      return;
-    }
-
-    if (!data.user || data.user.id !== ADMIN_UID) {
-      await db.auth.signOut();
-
-      showNotice(
-        'loginNotice',
-        'To konto nie jest kontem administratora.'
-      );
-
-      return;
-    }
-
-    currentUser = data.user;
-    setAdminMode(true);
-    closeModal('loginModal');
-
-    $('email').value = '';
-    $('password').value = '';
-
-    await loadProducts();
-
-  } catch (error) {
-    console.error('Błąd logowania:', error);
-
-    showNotice(
-      'loginNotice',
-      error.message || 'Wystąpił błąd logowania.'
-    );
-
-  } finally {
-    button.disabled = false;
-    button.textContent = 'Zaloguj się';
-  }
-}
-
-/* =========================================================
-   PRZESYŁANIE ZDJĘĆ
-========================================================= */
-
-async function uploadImages(files) {
-  const uploaded = [];
-
-  for (const file of files) {
-    if (!file.type.startsWith('image/')) {
-      throw new Error('Jeden z wybranych plików nie jest zdjęciem.');
-    }
-
-    if (file.size > 7 * 1024 * 1024) {
-      throw new Error(
-        'Zdjęcie "' + file.name + '" jest większe niż 7 MB.'
-      );
-    }
-
-    const cleanName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-
-    const path =
-      `${ADMIN_UID}/${Date.now()}-${crypto.randomUUID()}-${cleanName}`;
-
-    const { error } = await db.storage
-      .from(BUCKET)
-      .upload(path, file, {
-        cacheControl: '3600',
-        upsert: false
-      });
-
-    if (error) {
-      throw new Error(
-        'Nie udało się przesłać zdjęcia: ' + error.message
-      );
-    }
-
-    const { data } = db.storage
-      .from(BUCKET)
-      .getPublicUrl(path);
-
-    uploaded.push({
-      url: data.publicUrl,
-      path
-    });
-  }
-
-  return uploaded;
-}
-
-async function removeStoredImages(images) {
-  const paths = normalizeImages(images)
-    .map(image => image.path)
-    .filter(Boolean);
-
-  if (!paths.length) return;
-
-  const { error } = await db.storage
-    .from(BUCKET)
-    .remove(paths);
-
-  if (error) {
-    console.warn(
-      'Nie udało się usunąć niektórych plików:',
-      error.message
-    );
-  }
-}
-
-/* =========================================================
-   OTWIERANIE FORMULARZA PRODUKTU
-========================================================= */
-
-function openProduct(id = '') {
-  if (!isAdmin) return;
-
-  const product = items.find(
-    item => String(item.id) === String(id)
-  );
-
-  $('editId').value = product ? product.id : '';
-
-  $('productModalTitle').textContent = product
-    ? 'Edytuj produkt'
-    : 'Dodaj produkt';
-
-  $('pName').value = product?.name || '';
-  $('pCategory').value = product?.category || 'Bluzy';
-  $('pPrice').value = product?.price || '';
-  $('pDescription').value = product?.description || '';
-  $('pLink').value = product?.link || '';
-  $('pImages').value = '';
-
-  hideNotice('productNotice');
-  openModal('productModal');
-}
-
-/* =========================================================
-   ZAPISYWANIE PRODUKTU — POPRAWIONA WERSJA
-========================================================= */
-
-async function saveProduct() {
-  hideNotice('productNotice');
-
-  const button = $('saveProduct');
-
-  if (button.disabled) return;
-
-  button.disabled = true;
-  button.textContent = 'Sprawdzanie konta…';
-
-  let newImages = [];
-
-  try {
-    /*
-      Najpierw sprawdzamy konto bezpośrednio w Supabase.
-      Nie polegamy wyłącznie na zmiennej isAdmin w przeglądarce.
-    */
-
-    const {
-      data: authCheck,
-      error: authError
-    } = await db.auth.getUser();
-
-    if (authError) {
-      throw new Error(
-        'Nie udało się sprawdzić sesji Supabase: ' +
-        authError.message
-      );
-    }
-
-    const supabaseUserId = authCheck?.user?.id || null;
-
-    console.log('Sprawdzenie administratora:', {
-      isAdmin,
-      currentUserId: currentUser?.id || null,
-      supabaseUserId
-    });
-
-    if (
-      !supabaseUserId ||
-      supabaseUserId !== ADMIN_UID ||
-      !isAdmin
-    ) {
-      currentUser = null;
-      setAdminMode(false);
-
-      throw new Error(
-        'Supabase nie potwierdził sesji administratora. Wyloguj się i zaloguj ponownie.'
-      );
-    }
-
-    currentUser = authCheck.user;
-
-    const name = $('pName').value.trim();
-    const link = $('pLink').value.trim();
-    const description = $('pDescription').value.trim();
-    const files = Array.from($('pImages').files || []);
-    const editId = $('editId').value;
-
-    const old = items.find(
-      product => String(product.id) === String(editId)
-    );
-
-    if (!name) {
-      throw new Error('Wpisz nazwę produktu.');
-    }
-
-    if (link && !/^https?:\/\//i.test(link)) {
-      throw new Error(
-        'Link powinien zaczynać się od https:// lub http://'
-      );
-    }
-
-    const oldImages = old
-      ? normalizeImages(old.images)
-      : [];
-
-    if (oldImages.length + files.length > 5) {
-      throw new Error(
-        `Masz już ${oldImages.length} zdjęć. Możesz dodać jeszcze maksymalnie ${5 - oldImages.length}.`
-      );
-    }
-
-    button.textContent = 'Przesyłanie zdjęć…';
-
-    if (files.length) {
-      newImages = await uploadImages(files);
-    }
-
-    const allImages = [
-      ...oldImages,
-      ...newImages
-    ];
-
-    const payload = {
-      name,
-      description,
-      price: $('pPrice').value.trim(),
-      category: $('pCategory').value,
-      product_url: link,
-      images: allImages
-    };
-
-    button.textContent = 'Zapisywanie produktu…';
-
-    let result;
-
-    if (old) {
-      /*
-        Aktualizacja istniejącego produktu.
-      */
-
-      result = await db
-        .from(TABLE)
-        .update(payload)
-        .eq('id', old.id);
-
-    } else {
-      /*
-        Dodawanie nowego produktu.
-        Nie używamy tutaj .select().single().
-        Po zapisie i tak odświeżamy listę produktów.
-      */
-
-      result = await db
-        .from(TABLE)
-        .insert(payload);
-    }
-
-    if (result.error) {
-      if (newImages.length) {
-        await removeStoredImages(newImages);
-      }
-
-      throw new Error(
-        'Błąd zapisu produktu: ' + result.error.message
-      );
-    }
-
-    closeModal('productModal');
-
-    await loadProducts();
-
-    alert('Produkt został zapisany w Supabase.');
-
-  } catch (error) {
-    console.error('Błąd zapisywania produktu:', error);
-
-    /*
-      Jeśli zdjęcia zostały wysłane, ale zapis produktu się nie udał,
-      próbujemy usunąć nowe pliki, żeby nie zostawiać niepotrzebnych zdjęć.
-    */
-
-    if (newImages.length) {
-      await removeStoredImages(newImages);
-    }
-
-    showNotice(
-      'productNotice',
-      error.message || 'Wystąpił nieznany błąd.'
-    );
-
-  } finally {
-    button.disabled = false;
-    button.textContent = 'Zapisz produkt';
-  }
-}
-
-/* =========================================================
-   RESET HASŁA
-========================================================= */
-
-async function resetPassword() {
-  hideNotice('loginNotice');
-
-  const email = $('email').value.trim();
-
-  if (!email) {
-    showNotice(
-      'loginNotice',
-      'Najpierw wpisz swój adres e-mail.'
-    );
-    return;
-  }
-
-  const { error } = await db.auth.resetPasswordForEmail(email, {
-    redirectTo:
-      window.location.origin + window.location.pathname
-  });
-
-  if (error) {
-    showNotice(
-      'loginNotice',
-      'Błąd: ' + error.message
-    );
-    return;
-  }
-
-  showNotice(
-    'loginNotice',
-    'Wysłaliśmy link do zmiany hasła. Sprawdź swoją skrzynkę e-mail.'
-  );
-}
-
-async function saveNewPassword() {
-  const password = $('newPassword').value;
-  const confirmPassword = $('confirmPassword').value;
-
-  if (password.length < 8) {
-    alert('Hasło musi mieć co najmniej 8 znaków.');
-    return;
-  }
-
-  if (password !== confirmPassword) {
-    alert('Hasła nie są takie same.');
-    return;
-  }
-
-  const { error } = await db.auth.updateUser({
-    password
-  });
-
-  if (error) {
-    alert(
-      'Nie udało się zmienić hasła: ' + error.message
-    );
-    return;
-  }
-
-  alert('Hasło zostało zmienione!');
-
-  $('newPassword').value = '';
-  $('confirmPassword').value = '';
-
-  $('newPasswordModal').style.display = 'none';
-}
-
-/* =========================================================
-   USUWANIE PRODUKTU
-========================================================= */
-
-async function deleteProduct(id) {
-  if (!isAdmin) return;
-
-  const product = items.find(
-    item => String(item.id) === String(id)
-  );
-
-  if (!product) return;
-
-  if (!confirm('Czy na pewno usunąć ten produkt?')) {
-    return;
-  }
-
-  const { error } = await db
-    .from(TABLE)
-    .delete()
-    .eq('id', product.id);
-
-  if (error) {
-    alert(
-      'Nie udało się usunąć produktu: ' + error.message
-    );
-    return;
-  }
-
-  await removeStoredImages(product.images);
-
-  favorites = favorites.filter(
-    item => item !== String(product.id)
-  );
-
-  saveFavorites();
-
-  await loadProducts();
-}
-
-/* =========================================================
-   OBSŁUGA PRZYCISKÓW I ZDARZEŃ
-========================================================= */
-
-$('adminButton').onclick = () => {
-  if (isAdmin) {
-    openProduct();
-  } else {
-    hideNotice('loginNotice');
-    openModal('loginModal');
-    $('email').focus();
-  }
-};
-
-$('login').onclick = login;
-
-$('password').addEventListener('keydown', event => {
-  if (event.key === 'Enter') {
-    login();
-  }
-});
-
-$('resetPasswordButton').onclick = resetPassword;
-
-$('email').addEventListener('keydown', event => {
-  if (event.key === 'Enter') {
-    $('password').focus();
-  }
-});
-
-$('saveProduct').onclick = saveProduct;
-
-$('saveNewPasswordButton').onclick = saveNewPassword;
-
-document.querySelectorAll('[data-close]').forEach(button => {
-  button.onclick = () => {
-    closeModal(button.dataset.close);
-  };
-});
-
-['loginModal', 'productModal'].forEach(id => {
-  $(id).addEventListener('click', event => {
-    if (event.target === $(id)) {
-      closeModal(id);
-    }
-  });
-});
-
-$('search').addEventListener('input', render);
-$('sort').addEventListener('change', render);
-$('view').addEventListener('change', render);
-
-$('closeLightbox').onclick = () => {
-  $('lightbox').classList.remove('show');
-};
-
-$('lightbox').onclick = event => {
-  if (event.target === $('lightbox')) {
-    $('lightbox').classList.remove('show');
-  }
-};
-
-$('year').textContent = new Date().getFullYear();
-
-/* =========================================================
-   START STRONY
-========================================================= */
-
-async function start() {
-  db.auth.onAuthStateChange((event, session) => {
-    if (event === 'PASSWORD_RECOVERY') {
-      $('newPasswordModal').style.display = 'flex';
-    }
-
-    if (!session || session.user.id !== ADMIN_UID) {
-      currentUser = null;
-      setAdminMode(false);
-      return;
-    }
-
-    currentUser = session.user;
-    setAdminMode(true);
-  });
-
+function renderCategories(){
+ $('categories').innerHTML=CATS.map(c=>`<button class="chip ${activeCategory===c?'active':''}" data-cat="${c}">${c}</button>`).join('');
+ document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{
+  activeCategory=b.dataset.cat;
   renderCategories();
-
-  await checkAdminSession();
-  await loadProducts();
+  render();
+ });
 }
 
-start();
+function render(){
+ const q=$('search').value.trim().toLowerCase(),sort=$('sort').value,view=$('view').value;
+ let list=items.filter(p=>(activeCategory==='Wszystko'||p.category===activeCategory)&&(!q||(p.name+' '+p.category).toLowerCase().includes(q))&&(view!=='fav'||favorites.includes(p.id)));
 
+ if(sort==='cheap')list.sort((a,b)=>priceNum(a.price)-priceNum(b.price));
+ else if(sort==='expensive')list.sort((a,b)=>priceNum(b.price)-priceNum(a.price));
+ else if(sort==='az')list.sort((a,b)=>a.name.localeCompare(b.name,'pl'));
+ else list.sort((a,b)=>(b.created||0)-(a.created||0));
+
+ $('count').textContent=`${list.length} ${list.length===1?'produkt':list.length>1&&list.length<5?'produkty':'produktów'}`;
+
+ if(!list.length){
+  $('products').innerHTML=`<div class="empty"><strong>Na razie tu pusto</strong>${items.length?'Nie znaleziono produktów dla wybranych filtrów.':'Produkty pojawią się tutaj, gdy dodasz je w panelu administratora.'}</div>`;
+  return;
+ }
+
+ $('products').innerHTML=list.map(p=>`
+ <article class="product">
+  <div class="photo" data-photo="${escapeHtml(p.id)}">
+   ${p.images&&p.images[0]?`<img src="${escapeHtml(p.images[0])}" alt="${escapeHtml(p.name)}">`:`<div class="no-photo">LAMPIONFINDS</div>`}
+   <button class="heart ${favorites.includes(p.id)?'active':''}" data-fav="${escapeHtml(p.id)}" aria-label="Dodaj do ulubionych">${favorites.includes(p.id)?'♥':'♡'}</button>
+  </div>
+  <div class="product-info">
+   <div class="category-label">${escapeHtml(p.category||'Inne')}</div>
+   <div class="product-name" title="${escapeHtml(p.name)}">${escapeHtml(p.name)}</div>
+   <div class="price">${escapeHtml(p.price||'Cena niepodana')}</div>
+   <div class="product-actions">
+    <a class="visit" href="${safeUrl(p.link||'')}" target="_blank" rel="noopener noreferrer">ZOBACZ PRODUKT ↗</a>
+   </div>
+   ${isAdmin?`<div class="admin-tools"><button class="small-action" data-edit="${escapeHtml(p.id)}">Edytuj</button><button class="small-action" data-delete="${escapeHtml(p.id)}">Usuń</button></div>`:''}
+  </div>
+ </article>`).join('');
+
+ document.querySelectorAll('[data-fav]').forEach(b=>b.onclick=e=>{
+  e.stopPropagation();
+  const id=b.dataset.fav;
+  favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
+  localStorage.setItem(FAV_KEY,JSON.stringify(favorites));
+  render();
+ });
+
+ // Kliknięcie zdjęcia otwiera całą galerię
+ document.querySelectorAll('[data-photo]').forEach(el=>el.onclick=e=>{
+  if(e.target.closest('[data-fav]'))return;
+  const p=items.find(x=>String(x.id)===String(el.dataset.photo));
+  if(p?.images?.length){
+   openLightbox(p.images);
+  }
+ });
+
+ document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>{
+  if(confirm('Usunąć ten produkt?')){
+   items=items.filter(p=>p.id!==b.dataset.delete);
+   favorites=favorites.filter(x=>x!==b.dataset.delete);
+   persist();
+   localStorage.setItem(FAV_KEY,JSON.stringify(favorites));
+   render();
+  }
+ });
+
+ document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openProduct(b.dataset.edit));
+}
+
+function priceNum(v){
+ const n=parseFloat(String(v||'').replace(',','.').replace(/[^0-9.]/g,''));
+ return Number.isFinite(n)?n:0;
+}
+
+function openModal(id){$(id).classList.add('show')}
+function closeModal(id){$(id).classList.remove('show')}
+
+function openProduct(id=''){
+ const p=items.find(x=>x.id===id);
+ $('editId').value=p?.id||'';
+ $('productModalTitle').textContent=p?'Edytuj produkt':'Dodaj produkt';
+ $('pName').value=p?.name||'';
+ $('pCategory').value=p?.category||'Bluzy';
+ $('pPrice').value=p?.price||'';
+ $('pLink').value=p?.link||'';
+ $('pImages').value='';
+ openModal('productModal');
+}
+
+// Otwieranie galerii
+function openLightbox(images){
+ lightboxImages=images||[];
+ lightboxIndex=0;
+ if(!lightboxImages.length)return;
+ updateLightbox();
+ $('lightbox').classList.add('show');
+ document.body.style.overflow='hidden';
+}
+
+// Aktualizacja zdjęcia i licznika
+function updateLightbox(){
+ if(!lightboxImages.length)return;
+ $('lightboxImage').src=lightboxImages[lightboxIndex];
+ $('lightboxCounter').textContent=`${lightboxIndex+1} / ${lightboxImages.length}`;
+
+ const hasMany=lightboxImages.length>1;
+ $('lightboxPrev').style.display=hasMany?'grid':'none';
+ $('lightboxNext').style.display=hasMany?'grid':'none';
+ $('lightboxCounter').style.display=hasMany?'block':'none';
+}
+
+// Poprzednie zdjęcie
+function previousImage(){
+ if(lightboxImages.length<2)return;
+ lightboxIndex=(lightboxIndex-1+lightboxImages.length)%lightboxImages.length;
+ updateLightbox();
+}
+
+// Następne zdjęcie
+function nextImage(){
+ if(lightboxImages.length<2)return;
+ lightboxIndex=(lightboxIndex+1)%lightboxImages.length;
+ updateLightbox();
+}
+
+// Zamknięcie galerii
+function closeLightbox(){
+ $('lightbox').classList.remove('show');
+ document.body.style.overflow='';
+ lightboxImages=[];
+ lightboxIndex=0;
+ $('lightboxImage').src='';
+}
+
+$('adminButton').onclick=()=>{
+ if(isAdmin){openProduct();return}
+ openModal('loginModal');
+ $('password').focus();
+};
+
+$('login').onclick=()=>{
+ if($('password').value==='linkhub123'){
+  isAdmin=true;
+  closeModal('loginModal');
+  $('password').value='';
+  $('adminButton').textContent='＋ Dodaj produkt';
+  $('adminStatus').classList.add('show');
+  render();
+ }else alert('Nieprawidłowe hasło.');
+};
+
+$('password').addEventListener('keydown',e=>{
+ if(e.key==='Enter')$('login').click();
+});
+
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
+
+['loginModal','productModal'].forEach(id=>$(id).addEventListener('click',e=>{
+ if(e.target===$(id))closeModal(id);
+}));
+
+$('saveProduct').onclick=async()=>{
+ const name=$('pName').value.trim();
+ const link=$('pLink').value.trim();
+ const files=[...$('pImages').files].slice(0,5);
+ const editId=$('editId').value;
+
+ if(!name){alert('Wpisz nazwę produktu.');return}
+ if(link&&!/^https?:\/\//i.test(link)){
+  alert('Link powinien zaczynać się od https:// lub http://');
+  return;
+ }
+
+ const old=items.find(p=>p.id===editId);
+ let images=old?.images||[];
+
+ if(files.length){
+  try{
+   images=await Promise.all(files.map(file=>new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=()=>resolve(r.result);
+    r.onerror=reject;
+    r.readAsDataURL(file);
+   })));
+  }catch{
+   alert('Nie udało się odczytać zdjęć.');
+   return;
+  }
+ }
+
+ const product={
+  id:old?.id||crypto.randomUUID(),
+  name,
+  category:$('pCategory').value,
+  price:$('pPrice').value.trim(),
+  link,
+  images,
+  created:old?.created||Date.now()
+ };
+
+ if(old)items=items.map(p=>p.id===editId?product:p);
+ else items.push(product);
+
+ persist();
+ closeModal('productModal');
+ render();
+};
+
+$('search').addEventListener('input',render);
+$('sort').addEventListener('change',render);
+$('view').addEventListener('change',render);
+
+// Przyciski galerii
+$('lightboxPrev').onclick=e=>{
+ e.stopPropagation();
+ previousImage();
+};
+$('lightboxNext').onclick=e=>{
+ e.stopPropagation();
+ nextImage();
+};
+$('closeLightbox').onclick=closeLightbox;
+
+$('lightbox').onclick=e=>{
+ if(e.target===$('lightbox'))closeLightbox();
+};
+
+// Obsługa klawiatury
+document.addEventListener('keydown',e=>{
+ if(!$('lightbox').classList.contains('show'))return;
+
+ if(e.key==='ArrowLeft')previousImage();
+ if(e.key==='ArrowRight')nextImage();
+ if(e.key==='Escape')closeLightbox();
+});
+
+$('year').textContent=new Date().getFullYear();
+renderCategories();
+render();
 </script>
 </body>
 </html>
